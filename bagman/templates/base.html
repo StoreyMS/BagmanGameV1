@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Bagman{% endblock %}</title>
+<style>
+  :root { --bg:#f7f7f5; --card:#fff; --ink:#1d1d1b; --muted:#6b6b66; --line:#e3e3de; --accent:#1f6f50; --warn:#a15c00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#141413; --card:#1e1e1c; --ink:#ecece8; --muted:#a3a39c; --line:#33332f; --accent:#5fc49a; --warn:#e0a24a; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, sans-serif; }
+  header { padding:14px 16px; border-bottom:1px solid var(--line); display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  header strong { font-size:17px; }
+  header a { color:var(--muted); text-decoration:none; }
+  main { max-width:880px; margin:0 auto; padding:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px 16px; margin:10px 0; }
+  .muted { color:var(--muted); }
+  .pill { display:inline-block; padding:1px 8px; border-radius:99px; border:1px solid var(--line); font-size:12px; color:var(--muted); }
+  .score { font-variant-numeric: tabular-nums; font-weight:600; color:var(--accent); }
+  a { color:var(--accent); }
+  h2 { font-size:15px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin:26px 0 6px; }
+  button, input[type=submit] { background:var(--accent); color:#fff; border:0; border-radius:6px; padding:8px 14px; font:inherit; cursor:pointer; }
+  button.secondary { background:transparent; color:var(--ink); border:1px solid var(--line); }
+  input, select { font:inherit; padding:7px 9px; border:1px solid var(--line); border-radius:6px; background:var(--card); color:var(--ink); max-width:100%; }
+  form.inline { display:inline; }
+  .warn { color:var(--warn); }
+  table { width:100%; border-collapse:collapse; } td, th { text-align:left; padding:6px 4px; border-bottom:1px solid var(--line); vertical-align:top; }
+  label.attest { display:flex; gap:10px; align-items:flex-start; margin:12px 0; }
+</style>
+</head>
+<body>
+<header><strong>Bagman</strong><a href="/">Claims</a><a href="/settlements">Open settlements</a><a href="/payouts">Payout accounts</a></header>
+<main>{% block body %}{% endblock %}</main>
+</body>
+</html>

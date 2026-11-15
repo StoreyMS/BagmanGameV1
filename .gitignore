@@ -33,3 +33,16 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Bagman local data — never commit personal info or credentials
+data/
+profile.json
+credentials.json
+token.json
+*.egg-info/

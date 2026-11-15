@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block body %}
+{% set labels = {
+  "pending_review": "Waiting for you to confirm", "needs_manual": "Needs you to finish",
+  "confirmed": "Confirmed, ready to file", "filed": "Filed", "paid": "Paid",
+  "dismissed": "Dismissed", "expired": "Expired" } %}
+{% for status in [Status.PENDING_REVIEW, Status.NEEDS_MANUAL, Status.CONFIRMED, Status.FILED, Status.PAID, Status.DISMISSED, Status.EXPIRED] %}
+  {% set items = groups[status] %}
+  {% if items or status == Status.PENDING_REVIEW %}
+  <h2>{{ labels[status.value] }} ({{ items|length }})</h2>
+  {% for c in items %}
+    <div class="card">
+      <a href="/claims/{{ c.id }}"><strong>{{ c.title }}</strong></a>
+      <div class="muted">
+        <span class="score">{{ c.score }}</span> match ·
+        {% if c.deadline %}deadline {{ c.deadline }}{% else %}no deadline listed{% endif %}
+        {% if c.proof_required is not none %} · {{ "proof needed" if c.proof_required else "no proof needed" }}{% endif %}
+        {% if c.payout_text %} · {{ c.payout_text }}{% endif %}
+      </div>
+      <div class="muted">{{ c.reasons|join(" · ") }}</div>
+    </div>
+  {% else %}
+    <p class="muted">Nothing waiting. The daily scan adds matches here.</p>
+  {% endfor %}
+  {% endif %}
+{% endfor %}
+{% endblock %}

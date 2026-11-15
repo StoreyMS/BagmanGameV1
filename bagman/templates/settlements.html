@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>Open settlements ({{ settlements|length }})</h2>
+{% for s in settlements %}
+  <form method="post" action="/settlements/{{ s.id }}/keywords" class="card">
+    <a href="{{ s.url }}" target="_blank" rel="noopener"><strong>{{ s.title }}</strong></a>
+    <div class="muted">{% if s.deadline %}deadline {{ s.deadline }}{% else %}no deadline listed{% endif %}
+      {% if s.payout_text %} · {{ s.payout_text }}{% endif %}</div>
+    <p><input name="keywords" value="{{ s.keywords|join(', ') }}" placeholder="Search terms" style="width:70%">
+      <button class="secondary">Save</button></p>
+  </form>
+{% else %}
+  <p class="muted">None yet. Run <code>bagman sync</code>.</p>
+{% endfor %}
+{% endblock %}

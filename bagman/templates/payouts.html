@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>Payout accounts</h2>
+<p class="muted">You pick one of these each time you confirm a claim. Use a PayPal/Venmo email or a mailing address
+for checks. Don't store bank account or routing numbers here.</p>
+{% for a in accounts %}
+  <div class="card"><strong>{{ a.label }}</strong> <span class="muted">{{ a.method }}: {{ a.handle }}</span></div>
+{% endfor %}
+<form method="post" action="/payouts" class="card">
+  <p><input name="label" placeholder="Label, e.g. My PayPal" required></p>
+  <p><select name="method">{% for m in methods %}<option>{{ m }}</option>{% endfor %}</select>
+     <input name="handle" placeholder="Email, username or mailing address" required></p>
+  <button>Add account</button>
+</form>
+{% endblock %}
